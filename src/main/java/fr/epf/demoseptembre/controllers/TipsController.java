@@ -41,13 +41,6 @@ public class TipsController {
      * @param model le modèle
      * @return
      */
-    //TODO delete
-    @GetMapping("/tips")
-    public String getTips(Model model, Tips tips) {
-        model.addAttribute("tiphtml", tips);
-        model.addAttribute("data", tipsDao.findAll());
-        return "tips-list2";
-    }
 
     @GetMapping("/cityTips/{villeid}")
     public String getTipsByVille(@PathVariable int villeid, Model model, Tips tips, Ville ville, Categorie categorie) {
@@ -74,24 +67,7 @@ public class TipsController {
         return "tips-list";
     }
 
-
-    //TODO delete
-    @GetMapping("/addtips")
-    public String tipsForm(Tips tips, Model model) {
-        model.addAttribute("tiphtml", tips);
-        model.addAttribute("dataVilles", villeDao.findAll());
-        model.addAttribute("dataCategories", categorieDao.findAll());
-        return "add_tips";
-    }
-
-    //TODO delete
-    @PostMapping("/addtips")
-    public String addTips(Tips tips, Model model) {
-        tips.setNoteTips(0);
-        tipsDao.save(tips);
-        return "redirect:/tips";
-    }
-
+    
     @PostMapping("/addtips/{idville}/{idcategorie}")
     public String addTipsWithURLParameters(@PathVariable int idville, @PathVariable int idcategorie, Tips tips, Model model) {
         tips.setNoteTips(0);
