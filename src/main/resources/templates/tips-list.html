@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:td="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${tiphtml.ville.nom}"></title>
+</head>
+<body>
+<h1 th:text="${tiphtml.ville.nom + '    -    ' + tiphtml.categorie.nom} "></h1>
+<div class="row">
+  <div th:each="categorie : ${dataCategorie}"><a th:href="@{/cityTips/__${tiphtml.ville.id}__/__${categorie.id}__}" th:text="${categorie.nom}"/></div>
+</div>
+<table>
+
+
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1">
+      <!-- /.panel -->
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-12">
+
+              <form action="#" th:action="@{/addtips/__${tiphtml.ville.id}__/__${tiphtml.categorie.id}__}" th:object="${tiphtml}" method="post">
+              <input type="hidden" th:field="*{id}" />
+              <p>Titre: <input type="text" th:field="*{titre}" /></p>
+              <p>Commentaire: <input type="text" th:field="*{commentaire}" /></p>
+              <p>Auteur: <input type="text" th:field="*{auteur}" /></p>
+              <p>Note: <input type="text" th:field="*{noteG}" /></p>
+                <p><input type="submit" value="Submit" /></p>
+            </form>
+            </div>
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.panel-body -->
+      </div>
+      <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+  </div>
+
+  <tr>
+    <th>
+      id
+    </th>
+    <th>ville</th>
+    <th>pays</th>
+    <th>categorie</th>
+    <th>titre</th>
+    <th>auteur</th>
+    <th>commentaire</th>
+    <th>note</th>
+    <th>vote du public</th>
+    <th>Voter</th>
+    <th>Downvoter</th>
+  </tr>
+  <tr th:each="tip : ${data}">
+    <td th:text="${tip.id}"></td>
+    <td th:text="${tip.ville.Nom}"></td>
+    <td th:text="${tip.ville.Pays}"></td>
+    <td th:text="${tip.categorie.Nom}"></td>
+    <td th:text="${tip.titre}"></td>
+    <td th:text="${tip.auteur}"></td>
+    <td th:text="${tip.commentaire}"></td>
+    <td th:text="${tip.noteG}"></td>
+    <td th:text="${tip.noteTips}"></td>
+    <td><a th:href="@{/plusOne/__${tip.id}__}">+</a></td>
+    <td><a th:href="@{/minusOne/__${tip.id}__}">-</a></td>
+  </tr>
+</table>
+</body>
+</html>
