@@ -31,7 +31,7 @@ public class VilleController {
      * @param model le modèle
      * @return
      */
-    @GetMapping("/villes")
+    @GetMapping("/")
     public String getVilles(Model model) {
         model.addAttribute("data", villeDao.findAll());
         return "villes-list";

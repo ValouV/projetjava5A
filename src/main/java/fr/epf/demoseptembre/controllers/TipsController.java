@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * TODO class details.
  *
@@ -55,6 +57,16 @@ public class TipsController {
         return "tips-list";
     }
 
+    @GetMapping("/noteGlobale/{villeid}")
+    public String getNoteGlobale(@PathVariable int villeid, Model model, Tips tips, Ville ville, Categorie categorie, float note) {
+        final int categorieid = 8;
+        ville = villeDao.findById(villeid).get();
+        categorie = categorieDao.findById(categorieid).get();
+        tips.setVille(ville);
+        tips.setCategorie(categorie);
+        return "note";
+    }
+
     @GetMapping("/cityTips/{villeid}/{categorieid}")
     public String getTipsByVilleAndCategorie(@PathVariable int villeid, @PathVariable int categorieid, Model model, Tips tips, Ville ville, Categorie categorie) {
         ville = villeDao.findById(villeid).get();
@@ -67,7 +79,7 @@ public class TipsController {
         return "tips-list";
     }
 
-    
+
     @PostMapping("/addtips/{idville}/{idcategorie}")
     public String addTipsWithURLParameters(@PathVariable int idville, @PathVariable int idcategorie, Tips tips, Model model) {
         tips.setNoteTips(0);
@@ -93,6 +105,26 @@ public class TipsController {
         tips.setNoteTips(note);
         tipsDao.save(tips);
         return "redirect:/cityTips/" + tips.getVille().getId() + "/" + tips.getCategorie().getId();
+    }
+
+    @GetMapping("/noteGeneraleVille/{id}")
+    public String noteVille(@PathVariable int id, Model model) {
+        List<Tips> tips = tipsDao.findByVilleAndCategorieOrderByNoteTipsDesc(villeDao.findById(id).get(),categorieDao.findById(8).get());
+        if (tips.isEmpty()){
+            model.addAttribute("note", 0);
+            return "nombre";
+        }
+        float note = 0;
+        int i = 0;
+        for (Tips tip:tips
+             ) {
+            note = tip.getNoteG() + note;
+            i++;
+        }
+        note = note / i;
+        System.out.println(note);
+        model.addAttribute("note", note);
+        return "nombre";
     }
 
 }

@@ -6,25 +6,61 @@
 </head>
 <body>
 <table>
-
-
-
-
-
-
-
   <tr>
     <th>
       id
     </th>
     <th>Nom</th>
     <th>Pays</th>
+    <th>Note Moyenne</th>
   </tr>
   <tr th:each="ville : ${data}">
     <td th:text="${ville.id}"></td>
-    <td th:text="${ville.Nom}"></td>
+    <td ><a th:href="@{/cityTips/__${ville.id}__}" th:text="${ville.Nom}"/></td>
     <td th:text="${ville.Pays}"></td>
+    <td><div th:id="${ville.id}"/></td>
   </tr>
 </table>
 </body>
+
+<script type="text/javascript"
+        src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+<script type="text/javascript">
+    function getNoteAjax(i) {
+        $('#' + i).load('/noteGeneraleVille/' + i + ' #number');
+        console.log($('#' + i));
+
+/*
+        $.ajax({
+            url : '/noteGeneraleVille/' + i,
+            datatype : 'text',
+            success : function(data) {
+                console.log(data);
+                console.log(jQuery(data));
+                $('#' + i).html(data);
+                $('#' + i).children('meta,link,title,style').remove();
+            }
+
+        });
+        */
+    }
+</script>
+
+<script th:inline="javascript" type="text/javascript" >
+    $( document ).ready(function() {
+        /*<![CDATA[*/
+        var data = /*[[${data}]]*/ 'test';
+        /*]]>*/
+        console.log(data);
+        $.each(data, function (index, value) {
+            console.log(value);
+            getNoteAjax(value.id);
+        });
+    });
+
+
+
+</script>
+
 </html>
