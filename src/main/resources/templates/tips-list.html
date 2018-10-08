@@ -3,42 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <title th:text="${tiphtml.ville.nom}"></title>
+  <link rel="stylesheet" href="http://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>
-<h1 th:text="${tiphtml.ville.nom + '    -    ' + tiphtml.categorie.nom} "></h1>
+<body class="bg-light">
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">
+     <div th:text="${tiphtml.ville.nom + '    -    ' + tiphtml.categorie.nom} ">
+     </div>
+    </a>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+    <div th:each="categorie : ${dataCategorie}">
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/cityTips/__${tiphtml.ville.id}__/__${categorie.id}__}" th:text="  ${categorie.nom}  "/>
+    </li>
+  </div>
+      </ul>
+      <form class="form-inline mt-2 mt-md-0">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" th:href="@{/}">Accueil</button>
+      </form>
+    </div>
+  </nav>
+</header>
+<div class="container">
 <div class="row">
-  <div th:each="categorie : ${dataCategorie}"><a th:href="@{/cityTips/__${tiphtml.ville.id}__/__${categorie.id}__}" th:text="${categorie.nom}"/></div>
-</div>
-<table>
-
-
-  <div class="row">
-    <div class="col-lg-10 col-lg-offset-1">
-      <!-- /.panel -->
-      <div class="panel panel-default">
+  <div class="col-md-3">
+    <div class="panel panel-default">
         <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-12">
 
               <form action="#" th:action="@{/addtips/__${tiphtml.ville.id}__/__${tiphtml.categorie.id}__}" th:object="${tiphtml}" method="post">
-              <input type="hidden" th:field="*{id}" />
-              <p>Titre: <input type="text" th:field="*{titre}" /></p>
-              <p>Commentaire: <input type="text" th:field="*{commentaire}" /></p>
-              <p>Auteur: <input type="text" th:field="*{auteur}" /></p>
-              <p>Note: <input type="text" th:field="*{noteG}" /></p>
+                <input type="hidden" th:field="*{id}" />
+                <p>Titre: <input type="text" th:field="*{titre}" /></p>
+                <p>Commentaire: <input type="text" th:field="*{commentaire}" /></p>
+                <p>Auteur: <input type="text" th:field="*{auteur}" /></p>
+                <p>Note: <input type="text" th:field="*{noteG}" /></p>
                 <p><input type="submit" value="Submit" /></p>
-            </form>
-            </div>
-          </div>
-          <!-- /.row -->
-        </div>
+              </form>
         <!-- /.panel-body -->
       </div>
-      <!-- /.panel -->
-    </div>
-    <!-- /.col-lg-12 -->
+</div>
   </div>
-
+  <div>
+    <a href="#"><i class="fa fa-caret-up 20px"></i></a>
+  </div>
+  <div>
+    <a href="#"><i class="fa fa-caret-down 20px"></i></a>
+  </div>
+  <div class="col-md-9">
+  <table class="table">
   <tr>
     <th>
       id
@@ -68,5 +85,8 @@
     <td><a th:href="@{/minusOne/__${tip.id}__}">-</a></td>
   </tr>
 </table>
+</div>
+</div>
+</div>
 </body>
 </html>
