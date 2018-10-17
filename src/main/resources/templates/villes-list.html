@@ -25,11 +25,11 @@
     <tr th:each="ville : ${data}">
     <div class="col-lg-3 col-md-6 mb-4">
       <div class="card">
-        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+        <img class="card-img-top" th:src="@{/img/__${ville.image}__}" alt="">
         <div class="card-body">
           <h4 class="card-title"> <td ><a th:href="@{/cityTips/__${ville.id}__}" th:text="${ville.Nom}"/></td></h4>
           <p class="card-text">située en <td th:text="${ville.Pays}"></td>  cette ville possède sur notre site une note moyenne de : </p>
-          <h4> <td><div th:id="${ville.id}"/></td></h4>
+          <h4> <td><div th:id="${ville.id}"/></td></h4> (sur 5)
         </div>
       </div>
     </div>

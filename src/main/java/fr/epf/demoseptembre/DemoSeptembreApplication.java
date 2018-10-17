@@ -42,25 +42,5 @@ public class DemoSeptembreApplication {
    */
   @PostConstruct
   public void init() {
-    villeDao.deleteAll();
-    categorieDao.deleteAll();
-    tipsDao.deleteAll();
-    villeDao.save(new Ville(1,"Paris", "France"));
-    villeDao.save(new Ville(2, "Barcelone", "Espagne"));
-    villeDao.save(new Ville(3, "Londres", "UK"));
-    villeDao.save(new Ville(4, "Berlin", "UK"));
-    villeDao.save(new Ville(5, "Bruxelles", "UK"));
-    villeDao.save(new Ville(6, "Amsterdam", "UK"));
-    villeDao.save(new Ville(7, "Prague", "UK"));
-    categorieDao.save(new Categorie(8, "Général"));
-    categorieDao.save(new Categorie(9, "Restaurant"));
-    categorieDao.save(new Categorie(10, "Hotel"));
-    categorieDao.save(new Categorie(11, "Boite de Nuit"));
-    categorieDao.save(new Categorie(12, "Musée"));
-    categorieDao.save(new Categorie(13, "Parc"));
-    tipsDao.save(new Tips(14, villeDao.findById(1).get(), categorieDao.findById(9).get(), "trop bien", "marc", "ce resto est génial de fou", (float) 4.2, 0));
-    tipsDao.save(new Tips(15, villeDao.findById(1).get(), categorieDao.findById(9).get(), "excellent", "marc", "je me suis trompé il est encore mieux que ça", (float) 4.8, 0));
-    tipsDao.save(new Tips(16, villeDao.findById(1).get(), categorieDao.findById(8).get(), "nul", "marc", "Paris c'est pas Marseille, allez l'OM", (float) 2.8, 0));
-
   }
 }

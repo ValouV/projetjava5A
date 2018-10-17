@@ -28,54 +28,37 @@
     </li>
   </div>
       </ul>
-      <form class="form-inline mt-2 mt-md-0">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" th:href=@{"villes-list.html"}>ACCUEIL</button>
-      </form>
+      <a class="nav-link navbar-right" th:href="@{/}" th:text="ACCUEIL"/>
     </div>
   </nav>
 </div>
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 <div class="container">
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-4">
     <div class="sticky-top">
       <form class="text-center border border-light p-5" action="#" th:action="@{/addtips/__${tiphtml.ville.id}__/__${tiphtml.categorie.id}__}" th:object="${tiphtml}" method="post">
-
         <p class="h4 mb-4">Laissez un commentaire !</p>
+        <p th:text="${tiphtml.categorie.aide}"/>
         <input type="hidden" th:field="*{id}" />
-        <input type="text" th:field="*{titre}" class="form-control mb-4" placeholder="Titre">
-        <input type="text" th:field="*{auteur}" class="form-control mb-4" placeholder="Nom">
+        <input type="text" th:field="*{titre}" class="form-control mb-4" placeholder="Titre" required>
+        <input type="text" th:field="*{auteur}" class="form-control mb-4" placeholder="Nom" required>
         <div class="form-group">
-          <textarea class="form-control rounded-0" th:field="*{commentaire}" rows="3" placeholder="Commentaire"></textarea>
+          <textarea class="form-control rounded-0" th:field="*{commentaire}" rows="3" placeholder="Commentaire" required></textarea>
         </div>
-        <input type="text" th:field="*{noteG}" class="form-control mb-4" placeholder="Note">
+        <input type="number" step="0.01" min="0" max="5" th:field="*{noteG}" class="form-control mb-4" placeholder="Note" required>
         <button class="btn btn-info btn-block" type="submit">Envoyer</button>
       </form>
     </div>
   </div>
-  <div class="col-sm-8">
+  <div class="col-md-8">
     <tr th:each="tip : ${data}">
-      <div class="panel panel-white post panel-shadow">
-        <div class="post-heading">
-          <div class="pull-left image">
-            <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
-          </div>
-          <div class="pull-left meta">
-            <div class="title h5">
-             <mark><td th:text="${tip.auteur}"></td></mark>
-              a laissé un commentaire.
-            </div>
-            <h6 class="text-muted time">Note du commentaire : <td th:text="${tip.noteTips}"></td> </h6>
-          </div>
-        </div>
-        <div class="post-description">
+      <div class="panel panel-white post panel-shadow" style="padding:5px 10px">
+        <h6 class="text-muted time">Note du commentaire : <td th:text="${tip.noteTips}"></td> </h6>
+            <h3 style="margin-top:10px"><td th:text="${tip.titre}"></td></h3>
           <p>
-            <h3><td th:text="${tip.titre}"></td></h3>
-          </p>
-          <p>
-          <td th:text="${tip.commentaire}"> <h2 class="bold padding-bottom-7">
-          <td th:text="${tip.noteG}"></td>
-          </h2> </td>
+          <td th:text="${tip.commentaire}"></td><br/><br/>
+          <td th:text="${tip.auteur}"></td> a donné la note de <strong th:text="${tip.noteG}"></strong>
           </p>
           <div class="stats">
             <a th:href="@{/plusOne/__${tip.id}__}" class="btn btn-default stat-item">
@@ -85,7 +68,7 @@
               <i class="fa fa-thumbs-down icon"></i>
             </a>
           </div>
-        </div>
+
       </div>
     </tr>
 </div>
