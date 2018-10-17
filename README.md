@@ -5,7 +5,7 @@
 Ce repository git vaut comme rendu du projet EPF 5A Java de la fillière MIN. Ce projet s'intitule TipsZéAstuces.com.
 Le projet est un site web de conseil entre voyageurs sur differentes villes du monde.
 
-##Installation
+## Installation
 1. Cloner le projet
 2. Ouvrir le projet dans IntelliJ via le fichier pom.xml
 3. Créer une base de données sur votre moteur mysql
