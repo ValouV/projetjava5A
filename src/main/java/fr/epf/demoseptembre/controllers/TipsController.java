@@ -11,15 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 /**
- * TODO class details.
+ * Ce controleur permet la gestion de toutes les actions liées au tips.
  *
- * @author Loïc Ortola on 10/09/2018
+ * @author Valentin Vassas & Victor Aguer 19/09/2018
  */
+
 @Controller
 public class TipsController {
 
@@ -33,17 +33,7 @@ public class TipsController {
         this.categorieDao = categorieDao;
     }
 
-    /**
-     * Ceci sera mappé sur l'URL '/users'.
-     * C'est le routeur de Spring MVC qui va détecter et appeler directement cette méthode.
-     * Il lui fournira un "modèle", auquel on pourra rajouter des attributs.
-     * Ce modèle sera ensuite forwardé à une page web (dans resources/templates).
-     * Le nom de la template est retourné par la fonction. Ici, elle appelle donc le template "users".
-     *
-     * @param model le modèle
-     * @return
-     */
-
+    //récupération des tips généraux d'une ville
     @GetMapping("/cityTips/{villeid}")
     public String getTipsByVille(@PathVariable int villeid, Model model, Tips tips, Ville ville, Categorie categorie) {
         final int categorieid = 8;
@@ -57,16 +47,7 @@ public class TipsController {
         return "tips-list";
     }
 
-    @GetMapping("/noteGlobale/{villeid}")
-    public String getNoteGlobale(@PathVariable int villeid, Model model, Tips tips, Ville ville, Categorie categorie, float note) {
-        final int categorieid = 8;
-        ville = villeDao.findById(villeid).get();
-        categorie = categorieDao.findById(categorieid).get();
-        tips.setVille(ville);
-        tips.setCategorie(categorie);
-        return "note";
-    }
-
+    //récupération des tips d'une ville en précisant la catégorie
     @GetMapping("/cityTips/{villeid}/{categorieid}")
     public String getTipsByVilleAndCategorie(@PathVariable int villeid, @PathVariable int categorieid, Model model, Tips tips, Ville ville, Categorie categorie) {
         ville = villeDao.findById(villeid).get();
@@ -79,7 +60,7 @@ public class TipsController {
         return "tips-list";
     }
 
-
+    //ajout d'un tips
     @PostMapping("/addtips/{idville}/{idcategorie}")
     public String addTipsWithURLParameters(@PathVariable int idville, @PathVariable int idcategorie, Tips tips, Model model) {
         tips.setNoteTips(0);
@@ -89,6 +70,7 @@ public class TipsController {
         return "redirect:/cityTips/{idville}/{idcategorie}";
     }
 
+    //vote +1 sur un tips
     @GetMapping("/plusOne/{id}")
     public String upgradeTips(@PathVariable int id, Model model, Tips tips) {
         tips = tipsDao.findById(id).get();
@@ -98,6 +80,7 @@ public class TipsController {
         return "redirect:/cityTips/" + tips.getVille().getId() + "/" + tips.getCategorie().getId();
     }
 
+    //vote -1 sur un tips
     @GetMapping("/minusOne/{id}")
     public String downgradeTips(@PathVariable int id, Model model, Tips tips) {
         tips = tipsDao.findById(id).get();
@@ -107,6 +90,7 @@ public class TipsController {
         return "redirect:/cityTips/" + tips.getVille().getId() + "/" + tips.getCategorie().getId();
     }
 
+    //récupération de la note globale d'une ville
     @GetMapping("/noteGeneraleVille/{id}")
     public String noteVille(@PathVariable int id, Model model) {
         List<Tips> tips = tipsDao.findByVilleAndCategorieOrderByNoteTipsDesc(villeDao.findById(id).get(),categorieDao.findById(8).get());

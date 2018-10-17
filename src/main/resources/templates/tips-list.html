@@ -1,78 +1,105 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:td="http://www.w3.org/1999/xhtml">
-<head>
-  <meta charset="UTF-8">
-  <title th:text="${tiphtml.ville.nom}"></title>
-  <link rel="stylesheet" href="http://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="stylesheet" href="static/css/Header-Dark.css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-</head>
-<body class="bg-light">
-<div class ="header-dark">
-  <!-- Fixed navbar -->
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">
-     <div th:text="${tiphtml.ville.nom + '    -    ' + tiphtml.categorie.nom} ">
-     </div>
-    </a>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
-    <div th:each="categorie : ${dataCategorie}">
-      <li class="nav-item active">
-        <a class="nav-link" th:href="@{/cityTips/__${tiphtml.ville.id}__/__${categorie.id}__}" th:text="  ${categorie.nom}  "/>
-    </li>
-  </div>
-      </ul>
-      <a class="nav-link navbar-right" th:href="@{/}" th:text="ACCUEIL"/>
-    </div>
-  </nav>
-</div>
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<div class="container">
-<div class="row">
-  <div class="col-md-4">
-    <div class="sticky-top">
-      <form class="text-center border border-light p-5" action="#" th:action="@{/addtips/__${tiphtml.ville.id}__/__${tiphtml.categorie.id}__}" th:object="${tiphtml}" method="post">
-        <p class="h4 mb-4">Laissez un commentaire !</p>
-        <p th:text="${tiphtml.categorie.aide}"/>
-        <input type="hidden" th:field="*{id}" />
-        <input type="text" th:field="*{titre}" class="form-control mb-4" placeholder="Titre" required>
-        <input type="text" th:field="*{auteur}" class="form-control mb-4" placeholder="Nom" required>
-        <div class="form-group">
-          <textarea class="form-control rounded-0" th:field="*{commentaire}" rows="3" placeholder="Commentaire" required></textarea>
-        </div>
-        <input type="number" step="0.01" min="0" max="5" th:field="*{noteG}" class="form-control mb-4" placeholder="Note" required>
-        <button class="btn btn-info btn-block" type="submit">Envoyer</button>
-      </form>
-    </div>
-  </div>
-  <div class="col-md-8">
-    <tr th:each="tip : ${data}">
-      <div class="panel panel-white post panel-shadow" style="padding:5px 10px">
-        <h6 class="text-muted time">Note du commentaire : <td th:text="${tip.noteTips}"></td> </h6>
-            <h3 style="margin-top:10px"><td th:text="${tip.titre}"></td></h3>
-          <p>
-          <td th:text="${tip.commentaire}"></td><br/><br/>
-          <td th:text="${tip.auteur}"></td> a donné la note de <strong th:text="${tip.noteG}"></strong>
-          </p>
-          <div class="stats">
-            <a th:href="@{/plusOne/__${tip.id}__}" class="btn btn-default stat-item">
-              <i class="fa fa-thumbs-up icon"></i>
-            </a>
-            <a th:href="@{/minusOne/__${tip.id}__}" class="btn btn-default stat-item">
-              <i class="fa fa-thumbs-down icon"></i>
-            </a>
-          </div>
 
-      </div>
-    </tr>
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${tiphtml.ville.nom}"></title>
+
+    <link rel="stylesheet" href="http://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="static/css/Header-Dark.css"/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+
+</head>
+
+
+<body class="bg-light">
+<!-- Fixed navbar -->
+
+<div class="header-dark">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">
+            <div th:text="${tiphtml.ville.nom + '    -    ' + tiphtml.categorie.nom} ">
+            </div>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <div th:each="categorie : ${dataCategorie}">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/cityTips/__${tiphtml.ville.id}__/__${categorie.id}__}"
+                           th:text="  ${categorie.nom}  "/>
+                    </li>
+                </div>
+            </ul>
+            <a class="nav-link navbar-right" th:href="@{/}" th:text="ACCUEIL"/>
+        </div>
+    </nav>
 </div>
-  </div>
+
+<!-- Fixed navbar end -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Imput form -->
+            <div class="sticky-top">
+                <form class="text-center border border-light p-5" action="#"
+                      th:action="@{/addtips/__${tiphtml.ville.id}__/__${tiphtml.categorie.id}__}" th:object="${tiphtml}"
+                      method="post">
+                    <p class="h4 mb-4">Laissez un commentaire !</p>
+                    <p th:text="${tiphtml.categorie.aide}"/>
+                    <input type="hidden" th:field="*{id}"/>
+                    <input type="text" th:field="*{titre}" class="form-control mb-4" placeholder="Titre" required>
+                    <input type="text" th:field="*{auteur}" class="form-control mb-4" placeholder="Nom" required>
+                    <div class="form-group">
+                        <textarea class="form-control rounded-0" th:field="*{commentaire}" rows="3"
+                                  placeholder="Commentaire" required></textarea>
+                    </div>
+                    <input type="number" step="0.01" min="0" max="5" th:field="*{noteG}" class="form-control mb-4"
+                           placeholder="Note" required>
+                    <button class="btn btn-info btn-block" type="submit">Envoyer</button>
+                </form>
+            </div>
+        </div>
+        <!-- End of input form-->
+        <!-- Tips list-->
+        <div class="col-md-8">
+            <tr th:each="tip : ${data}">
+                <div class="panel panel-white post panel-shadow" style="padding:5px 10px">
+                    <h6 class="text-muted time">Note du commentaire :
+                        <td th:text="${tip.noteTips}"></td>
+                    </h6>
+                    <h3 style="margin-top:10px">
+                        <td th:text="${tip.titre}"></td>
+                    </h3>
+                    <p>
+                    <td th:text="${tip.commentaire}"></td>
+                    <br/><br/>
+                    <td th:text="${tip.auteur}"></td>
+                    a donné la note de <strong th:text="${tip.noteG}"></strong>
+                    </p>
+                    <div class="stats">
+                        <a th:href="@{/plusOne/__${tip.id}__}" class="btn btn-default stat-item">
+                            <i class="fa fa-thumbs-up icon"></i>
+                        </a>
+                        <a th:href="@{/minusOne/__${tip.id}__}" class="btn btn-default stat-item">
+                            <i class="fa fa-thumbs-down icon"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </tr>
+        </div>
+        <!-- End of Tip List -->
+    </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 </body>
 </html>

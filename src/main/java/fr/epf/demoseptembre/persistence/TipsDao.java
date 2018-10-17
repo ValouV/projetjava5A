@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * TODO class details.
+ * La fonction crée par le developpeur permet de retrouver des tips via deux paramètres
  *
- * @author Loïc Ortola on 10/09/2018
+ * @author Valentin Vassas & Victor Aguer 19/09/2018
  */
 @Repository
 public interface TipsDao extends CrudRepository<Tips, Integer> {

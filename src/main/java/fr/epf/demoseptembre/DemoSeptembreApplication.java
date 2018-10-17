@@ -1,8 +1,5 @@
 package fr.epf.demoseptembre;
 
-import fr.epf.demoseptembre.models.Tips;
-import fr.epf.demoseptembre.models.Ville;
-import fr.epf.demoseptembre.models.Categorie;
 import fr.epf.demoseptembre.persistence.TipsDao;
 import fr.epf.demoseptembre.persistence.VilleDao;
 import fr.epf.demoseptembre.persistence.CategorieDao;
