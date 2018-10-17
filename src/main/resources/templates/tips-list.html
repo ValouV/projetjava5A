@@ -29,7 +29,7 @@
   </div>
       </ul>
       <form class="form-inline mt-2 mt-md-0">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" th:href="@{/}">TA RACE</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" th:href=@{"villes-list.html"}>ACCUEIL</button>
       </form>
     </div>
   </nav>
@@ -62,29 +62,27 @@
           </div>
           <div class="pull-left meta">
             <div class="title h5">
-              <td th:text="${tip.auteur}"></td>
+             <mark><td th:text="${tip.auteur}"></td></mark>
               a laissé un commentaire.
             </div>
+            <h6 class="text-muted time">Note du commentaire : <td th:text="${tip.noteTips}"></td> </h6>
           </div>
         </div>
         <div class="post-description">
-          <p><table class="table">
-          <tr>
-            <th>titre</th>
-            <th>commentaire</th>
-            <th>note</th>
-          </tr>
-            <td th:text="${tip.titre}"></td>
-            <td th:text="${tip.commentaire}"></td>
-            <td th:text="${tip.noteG}"></td>
-        </table></p>
+          <p>
+            <h3><td th:text="${tip.titre}"></td></h3>
+          </p>
+          <p>
+          <td th:text="${tip.commentaire}"> <h2 class="bold padding-bottom-7">
+          <td th:text="${tip.noteG}"></td>
+          </h2> </td>
+          </p>
           <div class="stats">
-            <td th:text="${tip.noteTips}"></td>
             <a th:href="@{/plusOne/__${tip.id}__}" class="btn btn-default stat-item">
-              <i class="fa fa-thumbs-up icon"></i>2
+              <i class="fa fa-thumbs-up icon"></i>
             </a>
             <a th:href="@{/minusOne/__${tip.id}__}" class="btn btn-default stat-item">
-              <i class="fa fa-thumbs-down icon"></i>12
+              <i class="fa fa-thumbs-down icon"></i>
             </a>
           </div>
         </div>

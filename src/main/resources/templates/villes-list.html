@@ -3,25 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <link rel="stylesheet" href="http://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="static/css/Header-Dark.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
+
 <body>
-<table>
-  <tr>
-    <th>
-      id
-    </th>
-    <th>Nom</th>
-    <th>Pays</th>
-    <th>Note Moyenne</th>
-  </tr>
-  <tr th:each="ville : ${data}">
-    <td th:text="${ville.id}"></td>
-    <td ><a th:href="@{/cityTips/__${ville.id}__}" th:text="${ville.Nom}"/></td>
-    <td th:text="${ville.Pays}"></td>
-    <td><div th:id="${ville.id}"/></td>
-  </tr>
-</table>
+<div class="container">
+
+  <!-- Jumbotron Header -->
+  <header class="jumbotron my-4">
+    <h1 class="display-3">Bienvenue sur TipsZéAstuces.com</h1>
+    <p class="lead">Le site en vogue dans le monde du barroudage underground ! Retrouve ici les meilleurs bons plans pour voyager sans galère man ! Fais un tour et mets à l'aise en lachant un max de coms !!!</p>
+  </header>
+  <div class="row text-center">
+    <tr th:each="ville : ${data}">
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="card">
+        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+        <div class="card-body">
+          <h4 class="card-title"> <td ><a th:href="@{/cityTips/__${ville.id}__}" th:text="${ville.Nom}"/></td></h4>
+          <p class="card-text">située en <td th:text="${ville.Pays}"></td>  cette ville possède sur notre site une note moyenne de : </p>
+          <h4> <td><div th:id="${ville.id}"/></td></h4>
+        </div>
+      </div>
+    </div>
+    </tr>
+  </div>
+</div>
 </body>
+</html>
 
 <script type="text/javascript"
         src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
