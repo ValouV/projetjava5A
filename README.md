@@ -1,8 +1,17 @@
 # Training EPF Spring Boot
-=====
+# Projet Victor Aguer - Valentin Vassas
 
-1. Cloner le projet en utilisant la commande `git clone https://github.com/resourcepool/formation-spring-boot`
+## Introduction
+Ce repository git vaut comme rendu du projet EPF 5A Java de la fillière MIN. Ce projet s'intitule TipsZéAstuces.com.
+Le projet est un site web de conseil entre voyageurs sur differentes villes du monde.
 
-2. Importer le projet dans IntelliJ IDEA en important le fichier "pom.xml" à la racine de ce repository.
+##Installation
+1. Cloner le projet
+2. Ouvrir le projet dans IntelliJ via le fichier pom.xml
+3. Créer une base de données sur votre moteur mysql
+4. Importer le fichier dump_tips.sql
+5. Entrer les paramètres demandés dans le fichier application.properties
+6. Run le projet
+7. Enjoy
 
-3. Exécuter votre DB mysql. Si vous avez docker, vous pouvez utiliser la commande suivante: `docker run -e MYSQL_ROOT_PASSWORD=toor -e MYSQL_DATABASE=madbamoi -p "3306:3306" -d mysql`
+Pour toute demande supplémentaire veuillez contacter valentin.vassas@epfedu.fr
