@@ -166,7 +166,7 @@ CREATE TABLE `ville` (
 
 LOCK TABLES `ville` WRITE;
 /*!40000 ALTER TABLE `ville` DISABLE KEYS */;
-INSERT INTO `ville` VALUES (1,'paris.jpg','Paris','France'),(2,'barcelone.jpg','Barcelone','Espagne'),(3,'londres.jpg','Londres','Angleterre'),(4,'berlin.jpg','Berlin','Allemagne'),(5,'bruxelles.jpg','Bruxelles','Belgique'),(6,'amsterdam.jpg','Amsterdam','Pays Bas'),(7,'prague.jpg','Prague','Republique Tchèque');
+INSERT INTO `ville` VALUES (1,'paris.png','Paris','France'),(2,'barcelone.png','Barcelone','Espagne'),(3,'londres.png','Londres','Angleterre'),(4,'berlin.png','Berlin','Allemagne'),(5,'bruxelles.png','Bruxelles','Belgique'),(6,'amsterdam.png','Amsterdam','Pays Bas'),(7,'prague.png','Prague','Republique Tchèque');
 /*!40000 ALTER TABLE `ville` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
